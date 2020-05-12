@@ -18,5 +18,17 @@ module.exports = {
             return res.status(403).json({ e });
         }
     },
-    
+    deleteWorkout: async (req, res) => {
+        const { workoutId } = req.params;
+        try {
+            const workoutToDelete = await Workout.findById(workoutId);
+            if(!workoutToDelete) {
+                return res.status(401).json({ error: 'No workout with that ID' })
+            }
+            const deletedWorkout = await Workout.findByIdAndDelete(workoutId);
+            return res.status(200).json(deletedWorkout);
+        } catch (e) {
+            return res.status(403).json({ e });
+        }
+    }
 }
