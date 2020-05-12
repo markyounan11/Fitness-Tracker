@@ -4,7 +4,7 @@ module.exports = {
     getWorkout: async (req, res) => {
         try {
             const workout = await Workout.find()
-            if(!workout) return res.status(404).json({error: 'No workouts found'})
+            if (!workout) return res.status(404).json({ error: 'No workouts found' })
             return res.status(200).json(workout)
         } catch (e) {
             return res.status(403).json({ e })
@@ -22,7 +22,7 @@ module.exports = {
         const { workoutId } = req.params;
         try {
             const workoutToDelete = await Workout.findById(workoutId);
-            if(!workoutToDelete) {
+            if (!workoutToDelete) {
                 return res.status(401).json({ error: 'No workout with that ID' })
             }
             const deletedWorkout = await Workout.findByIdAndDelete(workoutId);
@@ -31,5 +31,17 @@ module.exports = {
             return res.status(403).json({ e });
         }
     },
-    
+    updateWorkout: async (req, res) => {
+        const { workoutId } = req.params;
+        try {
+            const workoutToUpdate = await Workout.findById(workoutId);
+            if (!workoutToUpdate) {
+                return res.status(401).json({ error: 'No workout with that ID' })
+            }
+            const updateWorkout = await Workout.findByIdAndUpdate(workoutId);
+            return res.status(200).json(updateWorkout);
+        } catch (e) {
+            return res.status(403).json({ e });
+        }
+    }
 }
