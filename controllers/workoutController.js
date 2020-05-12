@@ -10,4 +10,13 @@ module.exports = {
             return res.status(403).json({ e })
         }
     },
+    addWorkout: async (req, res) => {
+        try {
+            const newWorkout = await Workout.create({});
+            return res.status(200).json(newWorkout)
+        } catch (e) {
+            return res.status(403).json({ e });
+        }
+    },
+    
 }
