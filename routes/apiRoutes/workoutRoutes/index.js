@@ -1,15 +1,17 @@
 const router = require('express').Router();
 
-const { getWorkout, createWorkout, deleteWorkout, updateWorkout } = require('../../../controllers/workoutController');
+const { getWorkout, createWorkout, deleteWorkout, updateWorkout, workoutInRange } = require('./../../../controllers/workoutController');
 
-// '/api/workouts' prepended
-router.route('/workouts')
+// '/api/workout' 
+router.route('/')
     .get(getWorkout)
-    .post(createWorkout)
+    .post(createWorkout);
 
-    router.route('/workouts/:workoutId')
+router.route('/:id')
     .delete(deleteWorkout)
+    .put(updateWorkout);
 
-    .put(updateWorkout)
+router.route('/range')
+    .get(workoutInRange);
 
-    module.exports = router;
+module.exports = router;

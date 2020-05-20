@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const apiRoutes = require('./apiRoutes/workoutRoutes');
+const apiRoutes = require('./apiRoutes');
 const htmlRoutes = require('./htmlRoutes');
 // '/' automatically prepended 
 router.use( htmlRoutes );
